@@ -1,6 +1,6 @@
 import AdminLayout from "../../layouts/admin-layout"
 
-const Profile = () => {
+const Experience = () => {
     return (
         <AdminLayout>
             <div>
@@ -10,4 +10,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default Experience

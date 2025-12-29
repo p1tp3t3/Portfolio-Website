@@ -1,14 +1,15 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { UserAuth } from "../context/auth-context";
 
-const ProtectedRoute = () => {
+const UnProtectedRoute = () => {
     const { session } = UserAuth();
 
     if (session === undefined) {
         return <div>Loading...</div>;
     }
 
-    return <div>{session ? <Outlet /> : <Navigate to="/login" replace />}</div>;
+    // If logged in → kick them away from login
+    return session ? <Navigate to="/dashboard" /> : <Outlet />;
 };
 
-export default ProtectedRoute;
+export default UnProtectedRoute;

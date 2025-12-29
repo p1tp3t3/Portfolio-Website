@@ -2,6 +2,16 @@ import { Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 import Login from './pages/admin/login';
 import Home from './pages/client/home';
 import ProtectedRoute from './components/protected-route';
+import { sb_db } from './supabase-config';
+import UnProtectedRoute from './components/unprotected-route';
+import DashBoard from './pages/admin/dashboard';
+import Profile from './pages/admin/profile';
+import Project from './pages/admin/project';
+import Experience from './pages/admin/experience';
+import Skill from './pages/admin/skill';
+import Event from './pages/admin/event';
+import Certification from './pages/admin/certification';
+import Feedback from './pages/admin/feedback';
 
 
 function App() {
@@ -10,9 +20,18 @@ function App() {
       <div className="App">
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route element={<UnProtectedRoute />}>
+            <Route path='/login' element={<Login />} />
+          </Route>
           <Route element={<ProtectedRoute />}>
-            <Route path='/dashboard' element={<>dashboard</>} />
+            <Route path='/dashboard' element={<DashBoard />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/project' element={<Project />} />
+            <Route path='/experience' element={<Experience />} />
+            <Route path='/skill' element={<Skill />} />
+            <Route path='/event' element={<Event />} />
+            <Route path='/certification' element={<Certification />} />
+            <Route path='/feedback' element={<Feedback />} />
           </Route>
         </Routes>
       </div>

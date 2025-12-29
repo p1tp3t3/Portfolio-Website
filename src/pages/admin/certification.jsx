@@ -1,13 +1,13 @@
 import AdminLayout from "../../layouts/admin-layout"
 
-const Profile = () => {
+const Certification = () => {
     return (
         <AdminLayout>
             <div>
-                auth profile
+                auth certification
             </div>
         </AdminLayout>
     )
 }
 
-export default Profile
+export default Certification

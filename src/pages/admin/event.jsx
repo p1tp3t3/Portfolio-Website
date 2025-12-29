@@ -1,13 +1,13 @@
 import AdminLayout from "../../layouts/admin-layout"
 
-const Profile = () => {
+const Event = () => {
     return (
         <AdminLayout>
             <div>
-                auth profile
+                auth event
             </div>
         </AdminLayout>
     )
 }
 
-export default Profile
+export default Event
