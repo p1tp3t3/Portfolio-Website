@@ -1,0 +1,32 @@
+[
+    {
+        "title": "Experience 1",
+        "date": "Date",
+        "description": "description",
+        "details": [
+            "detail 1",
+            "detail 2",
+            "detail 3"
+        ]
+    },
+    {
+        "title": "Experience 2",
+        "date": "Date",
+        "description": "description",
+        "details": [
+            "detail 1",
+            "detail 2",
+            "detail 3"
+        ]
+    },
+    {
+        "title": "Experience 3",
+        "date": "Date",
+        "description": "description",
+        "details": [
+            "detail 1",
+            "detail 2",
+            "detail 3"
+        ]
+    }
+]

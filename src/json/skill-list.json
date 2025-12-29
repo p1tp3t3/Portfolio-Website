@@ -1,0 +1,90 @@
+[
+    {
+        "title": "Languages and Frameworks",
+        "icon": "icon 1",
+        "list": [
+            { "picture": "", "label": "HTML", "color": "text-orange-400 bg-orange-400/10" },
+            { "picture": "", "label": "CSS", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "Tailwind CSS", "color": "text-sky-400 bg-sky-400/10" },
+            { "picture": "", "label": "Vanilla JS", "color": "text-yellow-400 bg-yellow-400/10" },
+            { "picture": "", "label": "React JS", "color": "text-cyan-400 bg-cyan-400/10" },
+            { "picture": "", "label": "Node JS", "color": "text-green-400 bg-green-400/10" },
+            { "picture": "", "label": "PHP", "color": "text-indigo-400 bg-indigo-400/10" },
+            { "picture": "", "label": "C#", "color": "text-purple-400 bg-purple-400/10" },
+            { "picture": "", "label": "C++ (Arduino)", "color": "text-blue-300 bg-blue-300/10" },
+            { "picture": "", "label": "Python", "color": "text-yellow-300 bg-yellow-300/10" },
+            { "picture": "", "label": "Flask", "color": "text-emerald-400 bg-emerald-400/10" },
+            { "picture": "", "label": "Laravel", "color": "text-red-400 bg-red-400/10" },
+            { "picture": "", "label": "MySQL", "color": "text-sky-500 bg-sky-500/10" }
+        ]
+    },
+    {
+        "title": "A.I and Machine Learning Tools",
+        "icon": "icon 1",
+        "list": [
+            { "picture": "", "label": "Google Colab", "color": "text-yellow-400 bg-yellow-400/10" },
+            { "picture": "", "label": "Jupyter Notebook", "color": "text-orange-400 bg-orange-400/10" },
+            { "picture": "", "label": "Hugging Face", "color": "text-pink-400 bg-pink-400/10" },
+            { "picture": "", "label": "Pandas", "color": "text-indigo-400 bg-indigo-400/10" },
+            { "picture": "", "label": "Scikit Learn", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "Tensorflow", "color": "text-orange-500 bg-orange-500/10" },
+            { "picture": "", "label": "Gensim", "color": "text-green-400 bg-green-400/10" },
+            { "picture": "", "label": "Mathplotlib", "color": "text-sky-400 bg-sky-400/10" },
+            { "picture": "", "label": "NLTK", "color": "text-purple-400 bg-purple-400/10" }
+        ]
+    },
+    {
+        "title": "Web Dev Tools",
+        "icon": "icon 2",
+        "list": [
+            { "picture": "", "label": "VS Code", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "Pycharm", "color": "text-green-400 bg-green-400/10" },
+            { "picture": "", "label": "Git", "color": "text-orange-400 bg-orange-400/10" },
+            { "picture": "", "label": "GitHub", "color": "text-gray-300 bg-gray-300/10" },
+            { "picture": "", "label": "Docker", "color": "text-blue-400 bg-blue-300/10" },
+            { "picture": "", "label": "XAMMP", "color": "text-red-400 bg-red-400/10" },
+            { "picture": "", "label": "Postman", "color": "text-orange-500 bg-orange-500/10" }
+        ]
+    },
+    {
+        "title": "Networking Tools",
+        "icon": "icon 3",
+        "list": [
+            { "picture": "", "label": "Cisco Packet Tracer", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "Wireshark", "color": "text-sky-400 bg-sky-400/10" },
+            { "picture": "", "label": "Nmap", "color": "text-indigo-400 bg-indigo-400/10" },
+            { "picture": "", "label": "Netcat", "color": "text-green-400 bg-green-400/10" },
+            { "picture": "", "label": "PuTTy", "color": "text-yellow-400 bg-yellow-400/10" }
+        ]
+    },
+    {
+        "title": "VM (Virtual Machine) Tools",
+        "icon": "icon 1",
+        "list": [
+            { "picture": "", "label": "Oracle Virtual Box", "color": "text-blue-500 bg-blue-500/10" },
+            { "picture": "", "label": "VMWare", "color": "text-orange-500 bg-orange-500/10" }
+        ]
+    },
+    {
+        "title": "Ethical Hacking Tools",
+        "icon": "icon 4",
+        "list": [
+            { "picture": "", "label": "Kali Linux", "color": "text-purple-400 bg-purple-400/10" },
+            { "picture": "", "label": "Metasploit", "color": "text-red-400 bg-red-400/10" },
+            { "picture": "", "label": "Burp Suite", "color": "text-orange-400 bg-orange-400/10" },
+            { "picture": "", "label": "Aircrack-ng", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "SQL Map", "color": "text-green-400 bg-green-400/10" }
+        ]
+    },
+    {
+        "title": "U.I Design Tools",
+        "icon": "icon 5",
+        "list": [
+            { "picture": "", "label": "Figma", "color": "text-pink-400 bg-pink-400/10" },
+            { "picture": "", "label": "Adobe Photoshop", "color": "text-blue-400 bg-blue-400/10" },
+            { "picture": "", "label": "Adobe Illustrator", "color": "text-orange-400 bg-orange-400/10" },
+            { "picture": "", "label": "Canva", "color": "text-cyan-400 bg-cyan-400/10" },
+            { "picture": "", "label": "Visily", "color": "text-purple-400 bg-purple-400/10" }
+        ]
+    }
+]
