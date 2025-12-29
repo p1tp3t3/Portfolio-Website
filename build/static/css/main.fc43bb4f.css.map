@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.fc43bb4f.css","mappings":"AAAA,iBACE,IACE,SACF,CACF,CACA,OACE,sCACF","sources":["index.css"],"sourcesContent":["@keyframes blink {\r\n  50% {\r\n    opacity: 0;\r\n  }\r\n}\r\n.blink {\r\n  animation: blink 1s step-start infinite;\r\n}"],"names":[],"ignoreList":[],"sourceRoot":""}
