@@ -1,15 +1,27 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { UserAuth } from "../context/auth-context";
+import Reload from "./others/reload";
 
 const UnProtectedRoute = () => {
-    const { session } = UserAuth();
+  const { session } = UserAuth();
 
-    if (session === undefined) {
-        return <div>Loading...</div>;
-    }
+  // ⛔ Still checking auth → show loader only
+  if (session === undefined) {
+    return <Reload loading />;
+  }
 
-    // If logged in → kick them away from login
-    return session ? <Navigate to="/profile" /> : <Outlet />;
+  // ✅ Already logged in → redirect away from login
+  if (session) {
+    return <Navigate to="/profile" replace />;
+  }
+
+  // ❌ Not logged in → allow access
+  return (
+    <>
+      <Reload loading={false} />
+      <Outlet />
+    </>
+  );
 };
 
 export default UnProtectedRoute;

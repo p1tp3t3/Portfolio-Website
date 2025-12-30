@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextField from "./text-field";
 
 const InputList = ({ values = [], onChange, placeholder = "Enter value" }) => {
-  const [inputs, setInputs] = useState(values.length ? values : [""]);
+  const [inputs, setInputs] = useState([""]);
+
+  useEffect(() => {
+    setInputs(values.length ? values : [""])
+  }, [values])
 
   const updateInputs = (newInputs) => {
     setInputs(newInputs);
@@ -36,12 +40,17 @@ const InputList = ({ values = [], onChange, placeholder = "Enter value" }) => {
             </button>
         </div>
         <div className={`grid gap-3 w-full overflow-hidden overflow-y-auto ${inputs.length > 3 ? 'h-[14rem]' : ''}`}>
-        {inputs.map((value, index) => (
+        {inputs.map((val, index) => (
             <div
                 key={index}
                 className="flex items-center gap-2 w-full"
             >
-                <TextField />
+                <input
+                    type='text'
+                    required
+                    value={val}
+                    className="w-full px-4 py-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"
+                />
             <div>
                 <button
                     type="button"

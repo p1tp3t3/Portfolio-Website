@@ -1,4 +1,4 @@
-const TextField = ({ label, type = 'text', plc, name, err = null, val }) => {
+const TextField = ({ label = '', type = 'text', plc, name, err = null, val = null }) => {
     return (
         <div>
             <div>
@@ -11,7 +11,7 @@ const TextField = ({ label, type = 'text', plc, name, err = null, val }) => {
                     placeholder={plc}
                     name={name}
                     value={val}
-                    className="w-full px-4 py-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"
+                    className="w-full px-4 py-3 rounded-lg bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-700"
                 />
             </div>
             {err && <div className="text-red-600 text-sm font-bold">{err}</div>}

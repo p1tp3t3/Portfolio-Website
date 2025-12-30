@@ -7,29 +7,18 @@ const AdminSideBar = () => {
 
     const user = session.user
 
-    const navInfo = [
-        { label: 'Dashboard', icon: 'fa-solid fa-home', route: '/dashboard' },
-        { label: 'My Profile', icon: 'fa-solid fa-home', route: '/profile' },
-        { label: 'Manage Projects', icon: 'fa-solid fa-home', route: '/project' },
-        { label: 'Manage Skills', icon: 'fa-solid fa-home', route: '/skill' },
-        { label: 'Manage Events', icon: 'fa-solid fa-home', route: '/event' },
-        { label: 'Manage Certifications', icon: 'fa-solid fa-home', route: '/certification' },
-        { label: 'Manage Feedbacks', icon: 'fa-solid fa-home', route: '/feedback' },
-        { label: 'Logout', icon: 'fa-solid fa-home', route: '/logout' },
-    ]
-
     return (
         <aside className="h-screen sticky top-0 w-[16rem] flex-shrink-0 bg-gradient-to-b from-[#0b1220] to-[#050a14] text-gray-300 flex flex-col border-r border-white/5 gap-5">
 
         <div className="">
             <div className="mt-auto px-6 py-4 border-b border-white/5 flex items-center gap-3">
                 <img
-                    src="https://i.pravatar.cc/40"
+                    src={user.user_metadata.picture}
                     alt="user"
                     className="w-8 h-8 rounded-full"
                 />
                 <span className="text-sm font-medium text-white">
-                    Tom Cook
+                    {user.user_metadata.full_name}
                 </span>
             </div>
         </div>
@@ -50,7 +39,7 @@ const SidebarItem = ({ icon, label, route, active }) => {
     const handleSignOut = async () => {
         try {
             await signOut();
-            navigate("/")
+            window.location.reload()
         } catch (err) {
             console.log(err)
         }

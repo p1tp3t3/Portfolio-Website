@@ -2,11 +2,12 @@ import TextField from "../../components/input/text-field";
 import { useState } from "react";
 import { UserAuth } from "../../context/auth-context";
 import { useNavigate } from "react-router-dom";
+import { sb_db } from "../../supabase-config";
 
 const Login = () => {
     
     const navigate = useNavigate(),
-          { signInUser } = UserAuth()
+          { signInUser, signInUser0Auth } = UserAuth()
 
     const [err, setError] = useState('')
 
@@ -33,7 +34,7 @@ const Login = () => {
         if (session) {
             setError("")
         }
-    };
+    }
 
     return (
         <main className="text-white min-h-screen flex w-full justify-center grid grid-cols-1 md:grid-cols-2 bg-neutral-900 overflow-hidden shadow-xl">
@@ -76,13 +77,26 @@ const Login = () => {
                         </a>
                     </div>
 
-                    {/* Submit */}
-                    <button
-                        type="submit"
-                        className="w-full py-3 rounded-lg bg-blue-800 text-white font-semibold hover:bg-blue-900 transition"
-                    >
-                        Sign In
-                    </button>
+                    <div className="grid gap-2">
+                        {/* Submit */}
+                        <button
+                            type="submit"
+                            className="w-full py-3 rounded-lg bg-blue-800 text-white font-semibold hover:bg-blue-900 transition"
+                        >
+                            Sign In
+                        </button>
+                        <div className="flex gap-3 items-center">
+                            <div className="w-full h-[0.5px] bg-white"/><span>Or</span><div className="w-full h-[0.5px] bg-white"/>
+                        </div>
+                        <button
+                            onClick={signInUser0Auth}
+                            type="button"
+                            className="w-full py-3 rounded-lg border-blue-800 border-2 text-white font-semibold hover:bg-blue-900 transition"
+                        >
+                            Sign In With Google
+                        </button>
+                    </div>
+                    
                 </form>
             </div>
         </main>

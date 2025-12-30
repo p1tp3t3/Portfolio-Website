@@ -21,6 +21,15 @@ export const AuthContextProvider = ({ children }) => {
     return { success: true, data };
   };
 
+  const signInUser0Auth = async () => {
+    await sb_db.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/profile`,
+      },
+    });
+  }
+
   // Sign in
   const signInUser = async (email, password) => {
     try {
@@ -68,7 +77,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUpNewUser, signInUser, session, signOut }}
+      value={{ signUpNewUser, signInUser, session, signOut, signInUser0Auth }}
     >
       {children}
     </AuthContext.Provider>

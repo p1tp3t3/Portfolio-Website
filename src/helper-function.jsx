@@ -21,3 +21,7 @@ export const base64ToFile = (base64, filename) => {
 
   return new File([u8arr], filename, { type: mime });
 }
+
+export const checkNull = (val, key) => {
+  return val ? val[key] : ''
+}

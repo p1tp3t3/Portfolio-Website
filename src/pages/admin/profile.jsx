@@ -1,12 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AdminLayout from "../../layouts/admin-layout"
 import { Profile } from "../../model/profile"
 import ImageSelect from "../../components/input/image-select"
 import TextField from "../../components/input/text-field"
 import TextArea from "../../components/input/textarea"
 import InputList from "../../components/input/input-list"
+import { checkNull } from "../../helper-function"
+import FileUpload from "../../components/input/file-upload"
 
 const ProfilePage = () => {
+    const [temp_profile, setTempProfile] = useState(null)
     const [profile, setProfile] = useState({
         name: "John Doe",
         role: "Admin • Product Manager • Full-Stack Enthusiast",
@@ -17,6 +20,23 @@ const ProfilePage = () => {
         avatar: "https://i.pravatar.cc/300",
     })
 
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profileService = new Profile()
+                const data = await profileService.getProfile() // ✅ await it
+
+                document.title = data.name
+
+                setTempProfile(data) // set the resolved data
+                console.log(data)
+            } catch (err) {
+                console.error("Failed to load profile:", err)
+            }
+        }
+
+        fetchProfile() // call the async function
+    }, [])
     const handleChange = (e) => {
         const { name, value } = e.target
         setProfile({ ...profile, [name]: value })
@@ -39,7 +59,7 @@ const ProfilePage = () => {
                 className="min-h-screen text-white py-10"
             >
                 {/* Hero Section */}
-                <div className="flex text-center gap-10">
+                <div className="flex gap-10">
                     <div className="flex-shrink-0">
                         <ImageSelect type='profile' profilePic={new Profile().getProfilePicture()} />
                     </div>
@@ -47,17 +67,17 @@ const ProfilePage = () => {
                         <div className="w-full">
                             <TextField
                                 name='name'
-                                plc={profile.name}
+                                val={temp_profile?.name}
                             />
                         </div>
                         <div className="w-full">
-                            <div>
-                                <label htmlFor="">Curriculum Vitae</label>
-                            <input type="file" name="" id="" />
-                            </div>
+                            <FileUpload
+                                label={['', 'Upload Your Curriculum Vitae Pdf File', 'Maximum of 10 MB']}
+                            />
                         </div>
-                        <div className="w-full">
+                        <div className="w-full text-sm">
                             <InputList
+                                values={temp_profile?.auto_typer_items.item}
                             />
                         </div>     
                     </div>    
@@ -67,7 +87,7 @@ const ProfilePage = () => {
                             label='Short Description'
                             name='short_description'
                             onChange={handleChange}
-                            plc={profile.shortBio}
+                            val={temp_profile?.short_description}
                         />
                     </div>  
 
@@ -76,32 +96,37 @@ const ProfilePage = () => {
                     <div className="w-full mt-10">
                         <TextArea
                             name='about'
-                            onChange={handleChange}
-                            plc={profile.about}
+                            val={temp_profile?.about}
                             label='About'
                         />
-                    </div> 
+                    </div>
                     <div className="w-full mt-10 flex gap-5">
                         <div className="w-full grid gap-3">
                             <TextField
                                 label='Address'
+                                val={temp_profile?.contact[0].address}
                             />
                             <TextField
                                 label='Email'
+                                val={temp_profile?.contact[0].email}
                             />
                             <TextField
                                 label='Contact Number'
+                                val={temp_profile?.contact[0].contact_number}
                             />
                         </div>
                         <div className="w-full grid gap-3">
                             <TextField
                                 label='Facebook Link'
+                                val={temp_profile?.contact[0].facebook_link}
                             />
                             <TextField
                                 label='Instagram Link'
+                                val={temp_profile?.contact[0].instagram_link}
                             />
                             <TextField
                                 label='GitHub Link'
+                                val={temp_profile?.contact[0].github_link}
                             />
                         </div>
                     </div>  
