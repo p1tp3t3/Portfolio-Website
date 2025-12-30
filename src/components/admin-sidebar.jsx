@@ -19,7 +19,7 @@ const AdminSideBar = () => {
     ]
 
     return (
-        <aside className="h-screen w-[16rem] flex-shrink-0 bg-gradient-to-b from-[#0b1220] to-[#050a14] text-gray-300 flex flex-col border-r border-white/5 gap-5">
+        <aside className="h-screen sticky top-0 w-[16rem] flex-shrink-0 bg-gradient-to-b from-[#0b1220] to-[#050a14] text-gray-300 flex flex-col border-r border-white/5 gap-5">
 
         <div className="">
             <div className="mt-auto px-6 py-4 border-b border-white/5 flex items-center gap-3">
@@ -92,16 +92,6 @@ const SidebarItem = ({ icon, label, route, active }) => {
 
 const NavInfo = () => {
     return [
-        {
-            label: "Dashboard",
-            route: "/dashboard",
-            icon: (
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12l7-7 7 7" />
-                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
-            </svg>
-            ),
-        },
         {
             label: "My Profile",
             route: "/profile",

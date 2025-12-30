@@ -12,17 +12,7 @@ export class Project {
 
         const { data, error } = await supabase
             .from(this.table)
-            .insert([
-            {
-                name: newData['name'],
-                date_started: newData['date-started'],
-                date_started: newData['date-started'],
-                date_finised: newData['date-finished'],
-                category: newData['category'],
-                description: newData['description'],
-                repo_link: newData['repo-link']
-            }
-            ])
+            .insert([...newData])
             .select();
 
         if (error) throw error;

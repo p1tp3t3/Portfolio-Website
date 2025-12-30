@@ -14,34 +14,65 @@ import SkillList from "../../components/list/skill-list"
 import EventList from "../../components/list/event-list"
 import CertificationList from "../../components/list/certification-list"
 
+import { Profile } from "../../model/profile"
+import { useEffect, useState } from "react"
+
 
 const Home = (props) => {
+
+    const [profile, setProfile] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profileService = new Profile()
+                const data = await profileService.getProfile() // ✅ await it
+
+                document.title = data.name
+
+                setProfile(data) // set the resolved data
+                setLoading(false)
+            } catch (err) {
+                console.error("Failed to load profile:", err)
+            }
+        }
+
+        fetchProfile() // call the async function
+    }, [])
+
     return (
-        <ClientLayout>
+        <>
+        <FullPageLoader loading={loading} />
+        <ClientLayout footerData={profile ? profile.contact[0] : null}>
+            
             <div>
                 <Section>
                     <div className="grid place-items-center">
                         <div className="grid place-items-center w-[50%] gap-5">
-                            <ProfilePic className="w-[12rem] h-[12rem]" />
+                            <ProfilePic
+                                src={new Profile().getProfilePicture()}
+                                className="w-[12rem] h-[12rem]" 
+                            />
                             <div className="text-center grid gap-5">
                                 <div className="grid gap-5 text-center">
                                     <div>
-                                        <h1 className="text-[3em] font-bold">Peter Justin Delos Reyes</h1>
-                                        <AutoTyper className={'text-[2em] font-bold from-blue-700 via-blue-500 to-gray-300'} />
+                                        <h1 className="text-[3em] font-bold">{profile && profile.name}</h1>
+                                        <AutoTyper list={profile ? profile.auto_typer_items.item : []} className={'text-[2em] font-bold from-blue-700 via-blue-500 to-gray-300'} />
                                     </div>
                                     <div className="text-[0.9em]">
                                         <ContentList center={true} />
                                     </div>
                                     <div className="text-[1em] text-gray-300" dangerouslySetInnerHTML={{
                                         __html: toTitleCasePreserveMarkdown(
-                                            "I am a ***Full-Stack Web Developer*** skilled in building scalable applications, with expertise in ***Networking*** and ***Ethical Hacking***. I focus on creating secure, high-performance solutions by combining modern web technologies with robust cybersecurity practices."
+                                            profile ? `${profile.short_description}`.replace("\n", '<br>') : ''
                                         )
                                     }} />
                                 </div>
                             </div>
                             <div className="flex justify-center gap-3">
                                 <button className="px-6 py-3 bg-white rounded-full text-black">Lets Colab</button>
-                                <button className="px-6 py-3 border-white border rounded-full text-white">View My Resume</button>
+                                <button onClick={() => new Profile().getCurriculumVitae()} className="px-6 py-3 border-white border rounded-full text-white">View My Resume</button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +88,7 @@ const Home = (props) => {
                 <Section>
                     <div className="grid">
                         <div className="">
-                            <SkillList list={skill_list} />
+                            <SkillList list={profile ? profile.skill : []} />
                         </div>
                     </div>
                 </Section>
@@ -70,13 +101,31 @@ const Home = (props) => {
                     </div>
                 </Section>
                 <Section>
-                    <About />
+                    <About data={profile && profile.about} />
                 </Section>
-
             </div>
-        </ClientLayout>   
+        </ClientLayout>
+        </>   
     )
 }
+
+const FullPageLoader = ({ loading }) => {
+
+  if(loading) document.body.style.overflow = 'hidden'
+  else document.body.style.overflow = 'auto'
+  return (
+    <div
+      className={`fixed inset-0 flex flex-col items-center justify-center bg-black z-50 transition-opacity duration-700 ${
+        loading ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Spinner */}
+      <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+      {/* Loading text */}
+      <span className="mt-4 text-blue-500 text-lg font-semibold">Loading...</span>
+    </div>
+  );
+};
 
 const Section = ({ children }) => {
     return (
@@ -86,7 +135,7 @@ const Section = ({ children }) => {
     )
 }
 
-const About = () => {
+const About = ({ data }) => {
     return (
         <div className="p-5 bg-gray-900/40 rounded-xl border border-gray-700 w-full">
             <div className="grid gap-5">
@@ -97,45 +146,7 @@ const About = () => {
 
                 <div className="text-white grid gap-5 text-sm text-justify">
                     <p>
-                        I’m a web developer who enjoys building clean, responsive, and user-focused
-                        applications. I focus on creating interfaces that are not only visually
-                        appealing but also intuitive, accessible, and performant across different
-                        devices and screen sizes.
-                    </p>
-
-                    <p>
-                        My journey into web development started with the fundamentals of HTML, CSS,
-                        and JavaScript, and gradually expanded into modern frameworks and tools.
-                        Along the way, I developed a strong appreciation for writing readable,
-                        maintainable code that can scale as projects grow.
-                    </p>
-
-                    <p>
-                        I’m particularly interested in modern front-end development, where design
-                        meets logic. I enjoy translating UI designs into clean code, optimizing
-                        performance, and ensuring smooth user interactions through thoughtful
-                        component structure and state management.
-                    </p>
-
-                    <p>
-                        Beyond front-end development, I have a growing interest in web security and
-                        networking fundamentals. I enjoy learning how systems communicate, how
-                        vulnerabilities arise, and how secure applications can be built with a
-                        defensive mindset from the start.
-                    </p>
-
-                    <p>
-                        I frequently experiment with tools such as virtual machines, Linux
-                        environments, and security testing platforms to better understand real-world
-                        development and deployment scenarios. This hands-on approach helps me gain
-                        practical insight beyond theory.
-                    </p>
-
-                    <p>
-                        When I’m not coding, I spend time exploring new technologies, improving my
-                        problem-solving skills, and working on personal projects that challenge me
-                        to think creatively. I’m driven by continuous learning and a desire to grow
-                        as a developer with a strong technical foundation.
+                        {data}
                     </p>
                 </div>
             </div>

@@ -9,7 +9,7 @@ const UnProtectedRoute = () => {
     }
 
     // If logged in → kick them away from login
-    return session ? <Navigate to="/dashboard" /> : <Outlet />;
+    return session ? <Navigate to="/profile" /> : <Outlet />;
 };
 
 export default UnProtectedRoute;

@@ -54,7 +54,7 @@ const SkillList = ({ list }) => {
                             }}
                             >
                                 <AnimatePresence>
-                                    {(open ? e.list : e.list.slice(0, 6)).map((f) => (
+                                    {(open ? e.list.item : e.list.item.slice(0, 6)).map((f) => (
                                     <motion.span
                                         key={f.label}
                                         variants={{

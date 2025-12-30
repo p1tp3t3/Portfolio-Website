@@ -5,7 +5,7 @@ import ProtectedRoute from './components/protected-route';
 import { sb_db } from './supabase-config';
 import UnProtectedRoute from './components/unprotected-route';
 import DashBoard from './pages/admin/dashboard';
-import Profile from './pages/admin/profile';
+import ProfilePage from './pages/admin/profile';
 import Project from './pages/admin/project';
 import Experience from './pages/admin/experience';
 import Skill from './pages/admin/skill';
@@ -25,7 +25,7 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute />}>
             <Route path='/dashboard' element={<DashBoard />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<ProfilePage />} />
             <Route path='/project' element={<Project />} />
             <Route path='/experience' element={<Experience />} />
             <Route path='/skill' element={<Skill />} />

@@ -27,7 +27,7 @@ const Login = () => {
                 setError("")
             }, 3000)
         } else {
-            navigate("/dashboard")
+            navigate("/profile")
         }
 
         if (session) {
