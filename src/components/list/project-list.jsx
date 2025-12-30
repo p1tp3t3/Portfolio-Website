@@ -40,7 +40,7 @@ const ProjectList = ({ list = ['data 1', 'data 2', 'data 3'] }) => {
 };
 
 const Row = ({ data }) => {
-  const { title, description, content = ['data 1'], repoUrl, demoUrl } = data;
+  const { name, description, category, repo_link, date_started, date_finished } = data;
 
   return (
     <div className="grid gap-3 border-b border-b-1 border-gray-700 pb-4 w-full">
@@ -53,13 +53,14 @@ const Row = ({ data }) => {
         <div className="w-full flex flex-col justify-between">
           <div>
             <div className="mb-3">
-                <h3 className="text-lg font-bold">{title || "Project Title"}</h3>
+                <h3 className="text-lg font-bold">{name || "Project Title"}</h3>
                 <div className="text-sm">
-                    <p>Jan 5 2025</p>
+                    <p>Started Since {new Date(date_started).toDateString()}</p>
+                    <p>Finished Since {new Date(date_finished).toDateString()}</p>
                 </div>
                 <div className="text-[0.8em] mt-2">
                     <div className="flex items-center gap-1 flex-wrap w-full whitespace-nowrap">
-                        {content.map((e, i) => 
+                        {category.item.map((e, i) => 
                         <span className="rounded-full border border-gray-700 bg-gray-800 px-3 py-1 text-xs font-medium text-gray-400">
                             {e}
                         </span>
@@ -76,23 +77,13 @@ const Row = ({ data }) => {
           {/* Footer Links */}
           <div className="mt-4 flex gap-4">
             <a
-              href={repoUrl || "#"}
+              href={repo_link || "#"}
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline text-sm"
             >
               Repository
             </a>
-            {demoUrl && (
-              <a
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline text-sm"
-              >
-                Demo
-              </a>
-            )}
           </div>
         </div>
       </div>

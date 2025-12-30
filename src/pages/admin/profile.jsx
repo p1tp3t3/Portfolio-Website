@@ -7,18 +7,13 @@ import TextArea from "../../components/input/textarea"
 import InputList from "../../components/input/input-list"
 import { checkNull } from "../../helper-function"
 import FileUpload from "../../components/input/file-upload"
+import { useToast } from "../../context/toast-context"
 
 const ProfilePage = () => {
     const [temp_profile, setTempProfile] = useState(null)
-    const [profile, setProfile] = useState({
-        name: "John Doe",
-        role: "Admin • Product Manager • Full-Stack Enthusiast",
-        shortBio:
-            "I build scalable digital products, design intuitive user experiences, and help teams turn ideas into production-ready solutions.",
-        about:
-            "I am an experienced administrator and product-focused developer with a passion for clean architecture, performance optimization, and thoughtful design.\n\nOutside of work, I enjoy learning new technologies, contributing to open-source projects, and mentoring junior developers.",
-        avatar: "https://i.pravatar.cc/300",
-    })
+    const [profile, setProfile] = useState({})
+
+    const { addToast } = useToast()
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -29,7 +24,15 @@ const ProfilePage = () => {
                 document.title = data.name
 
                 setTempProfile(data) // set the resolved data
-                console.log(data)
+                setProfile((prev) => ({
+                    ...data,
+                    address: data.contact[0].address,
+                    email: data.contact[0].email,
+                    contact_number: data.contact[0].contact_number,
+                    facebook_link: data.contact[0].facebook_link,
+                    instagram_link: data.contact[0].instagram_link,
+                    github_link: data.contact[0].github_link,
+                }))
             } catch (err) {
                 console.error("Failed to load profile:", err)
             }
@@ -37,6 +40,8 @@ const ProfilePage = () => {
 
         fetchProfile() // call the async function
     }, [])
+
+
     const handleChange = (e) => {
         const { name, value } = e.target
         setProfile({ ...profile, [name]: value })
@@ -44,11 +49,40 @@ const ProfilePage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const f = new FormData(e.target)
+        const items = []
+        
+        f.forEach((e, key) => {
+            if(key.includes('item')) {
+                if(e != '') items.push(e)
+            }
+        })
+
+
+        const data = {
+            profile: {
+                name: f.get('name'),
+                auto_typer_items: { item: items },
+                short_description: f.get('short_description'),
+                about: f.get('about')
+            },
+            contact: {
+                address: f.get('address'),
+                contact_number: f.get('contact_number'),
+                email: f.get('email'),
+                facebook_link: f.get('facebook_link'),
+                instagram_link: f.get('instagram_link'),
+                github_link: f.get('github_link'),
+            }
+        }
+        
         try {
-            const profileService = new Profile()
-            await profileService.update(profile.id) // ✅ await it
+            const profileService = new Profile(data)
+            await profileService.updateProfile(temp_profile.id) // ✅ await it
+
+            addToast('Your Profile Has Been Successfully Updated', 'success')
         } catch (err) {
-            console.error("Failed to load profile:", err)
+            addToast('There Was An Error In Updating Your Profile', 'error')
         }
     }
 
@@ -67,7 +101,8 @@ const ProfilePage = () => {
                         <div className="w-full">
                             <TextField
                                 name='name'
-                                val={temp_profile?.name}
+                                val={profile?.name}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="w-full">
@@ -78,6 +113,8 @@ const ProfilePage = () => {
                         <div className="w-full text-sm">
                             <InputList
                                 values={temp_profile?.auto_typer_items.item}
+                                name={'item'}
+                                onChange={handleChange}
                             />
                         </div>     
                     </div>    
@@ -87,7 +124,7 @@ const ProfilePage = () => {
                             label='Short Description'
                             name='short_description'
                             onChange={handleChange}
-                            val={temp_profile?.short_description}
+                            val={profile?.short_description}
                         />
                     </div>  
 
@@ -96,37 +133,50 @@ const ProfilePage = () => {
                     <div className="w-full mt-10">
                         <TextArea
                             name='about'
-                            val={temp_profile?.about}
+                            val={profile?.about}
                             label='About'
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="w-full mt-10 flex gap-5">
                         <div className="w-full grid gap-3">
                             <TextField
                                 label='Address'
-                                val={temp_profile?.contact[0].address}
+                                name='address'
+                                val={profile?.address}
+                                onChange={handleChange}
                             />
                             <TextField
                                 label='Email'
-                                val={temp_profile?.contact[0].email}
+                                name='email'
+                                val={profile?.email}
+                                onChange={handleChange}
                             />
                             <TextField
                                 label='Contact Number'
-                                val={temp_profile?.contact[0].contact_number}
+                                name='contact_number'
+                                val={profile?.contact_number}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className="w-full grid gap-3">
                             <TextField
                                 label='Facebook Link'
-                                val={temp_profile?.contact[0].facebook_link}
+                                name='facebook_link'
+                                val={profile?.facebook_link}
+                                onChange={handleChange}
                             />
                             <TextField
                                 label='Instagram Link'
-                                val={temp_profile?.contact[0].instagram_link}
+                                name='instagram_link'
+                                val={profile?.instagram_link}
+                                onChange={handleChange}
                             />
                             <TextField
                                 label='GitHub Link'
-                                val={temp_profile?.contact[0].github_link}
+                                name='github_link'
+                                val={profile?.github_link}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>  

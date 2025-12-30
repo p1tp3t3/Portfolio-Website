@@ -13,6 +13,7 @@ export class Profile {
             .select(`
                 *,
                 contact:contact(*),
+                project:project(*),
                 skill:skill(*)
             `)
             .maybeSingle()
@@ -63,6 +64,7 @@ export class Profile {
     }
 
     async updateProfile(id) {
+        console.log(this.data)
         const { error } = await sb_db.rpc("update_profile_and_contact", {
             p_profile_id: id,
             p_profile: this.data['profile'],

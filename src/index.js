@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthContextProvider } from './context/auth-context';
+import { ToastProvider } from './context/toast-context';
+import { WarningProvider } from './context/warning-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <App />
+      <ToastProvider>
+        <WarningProvider>
+          <App />
+        </WarningProvider>
+      </ToastProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

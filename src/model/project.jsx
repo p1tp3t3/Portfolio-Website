@@ -10,16 +10,16 @@ export class Project {
     async create() {
         const newData = this.data
 
-        const { data, error } = await supabase
+        const { data, error } = await sb_db
             .from(this.table)
-            .insert([...newData])
+            .insert([{...newData}])
             .select();
 
         if (error) throw error;
         return data;
     }
     async update(id) {
-        const { data, error } = await supabase
+        const { data, error } = await sb_db
             .from(this.table)
             .update(this.data)
             .eq("id", id)
@@ -29,25 +29,34 @@ export class Project {
         return data;
     }
     async delete(id) {
-        const { error } = await supabase
+        // Delete the record
+        const { error: deleteError } = await sb_db
             .from(this.table)
             .delete()
             .eq("id", id);
 
-        if (error) throw error;
+        if (deleteError) throw deleteError;
+
+        // Fetch updated list
+        const { data, error: fetchError } = await sb_db
+            .from(this.table)
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (fetchError) throw fetchError;
+
+        return data;
+
     }
 
+
     async list() {
-        let get = null
         const { data, error } = await sb_db
             .from(this.table)
-            .select("*");
+            .select();
 
-        if (error) {
-            get = error.message;
-        } else {
-            get = data;
-        }
-        return get
+        if (error) throw error
+
+        return data
     }
 }
