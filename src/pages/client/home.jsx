@@ -82,7 +82,7 @@ const Home = (props) => {
                     <div className="grid w-full">
                         <div className="flex gap-5 w-full">
                             <ProjectList list={profile ? profile.project : []} />
-                            <ExperienceList />
+                            <ExperienceList list={profile ? profile.experience : []} />
                         </div>
                     </div>
                 </Section>

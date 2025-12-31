@@ -3,9 +3,11 @@ import { sb_db } from "../supabase-config";
 import TextField from "./input/text-field";
 import Feedback from "../pages/admin/feedback";
 import { FeedBack } from "../model/feedback";
-
+import { useToast } from "../context/toast-context";
 
 const Footer = ({ data }) => {
+
+    const { addToast } = useToast()
     const list = {
         contact_list: [
             {
@@ -58,10 +60,11 @@ const Footer = ({ data }) => {
         try {
             const feedback = new FeedBack(feedbackData);
             const created = await feedback.create();
+            addToast('Your Feedback Has Been Send Sucessfully to the Admin', 'success')
             console.log("Feedback saved:", created);
-            e.target.reset(); // clear form
         } catch (err) {
             console.error("Failed to create feedback:", err);
+            addToast('There Was An Error In Sending Your Feedback', 'error')
         }
     }
 
@@ -135,7 +138,7 @@ const Footer = ({ data }) => {
                             </div>
                             <div className="w-full h-[9rem]">
                                 <textarea 
-                                    name="" 
+                                    name="description" 
                                     placeholder="Your Feedback" 
                                     id=""
                                     className="w-full h-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"

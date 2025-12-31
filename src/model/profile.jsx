@@ -7,21 +7,32 @@ export class Profile {
         this.data = data
     }
 
-    async getProfile() {
-        const { data, error } = await sb_db
-            .from(this.table)
-            .select(`
-                *,
-                contact:contact(*),
-                project:project(*),
-                skill:skill(*)
-            `)
-            .maybeSingle()
+   async getProfile() {
+  const { data, error } = await sb_db
+    .from(this.table)
+    .select(`
+      *,
+      contact:contact(*),
+      project:project(*),
+      skill:skill(*),
+      experience:experience(*)
+    `)
+    .maybeSingle();
 
+  if (error) throw error;
+  if (!data) return null;
 
-        if (error) throw error
-        return data // object or null
-    }
+  return {
+    ...data,
+    project: data.project?.sort(
+      (a, b) => new Date(b.date_started) - new Date(a.date_started)
+    ) || [],
+    experience: data.experience?.sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    ) || [],
+  };
+}
+
 
     getProfilePicture() {
         const { data: publicUrl, error } = sb_db

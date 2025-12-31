@@ -64,11 +64,10 @@ const Row = ({ data }) => {
             </p>
             <div className="py-2">
                 <ul className="list-disc pl-5 text-[0.8em] text-gray-500 grid gap-2 text-justify">
-                    <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, autem porro. Officia provident reprehenderit, libero natus possimus eveniet optio inventore nulla impedit similique? Perspiciatis rerum fugit consequuntur excepturi delectus corrupti.</li>
-                    <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, autem porro. Officia provident reprehenderit, libero natus possimus eveniet optio inventore nulla impedit similique? Perspiciatis rerum fugit consequuntur excepturi delectus corrupti.</li>
-                    <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, autem porro. Officia provident reprehenderit, libero natus possimus eveniet optio inventore nulla impedit similique? Perspiciatis rerum fugit consequuntur excepturi delectus corrupti.</li>
-                    <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, autem porro. Officia provident reprehenderit, libero natus possimus eveniet optio inventore nulla impedit similique? Perspiciatis rerum fugit consequuntur excepturi delectus corrupti.</li>
-                </ul>
+                    {data.details.item.map((e, i) =>
+                      <li key={i}>{e}</li>
+                    )}
+                  </ul>
             </div>
           </div>
         </div>

@@ -17,9 +17,14 @@ const AdminSideBar = () => {
                     alt="user"
                     className="w-8 h-8 rounded-full"
                 />
-                <span className="text-sm font-medium text-white">
-                    {user.user_metadata.full_name}
-                </span>
+                <div>
+                    <div className="text-sm font-medium text-white">
+                        {user.user_metadata.full_name}
+                    </div>
+                    <div className="text-sm text-gray-400">
+                        Administrator Account
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -53,7 +53,8 @@ export class Project {
     async list() {
         const { data, error } = await sb_db
             .from(this.table)
-            .select();
+            .select()
+            .order("created_at", { ascending: false });
 
         if (error) throw error
 
