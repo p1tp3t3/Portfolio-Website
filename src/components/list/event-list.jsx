@@ -1,4 +1,4 @@
-const EventList = ({ list = ['data 1', 'data 2'] }) => {
+const EventList = ({ list = [] }) => {
     return (
         <div className="p-5 bg-gray-900/40 rounded-xl border border-gray-700 w-full">
             <div className="flex flex-col gap-5 w-full">
@@ -24,27 +24,27 @@ const Row = ({ data }) => {
                 <div className="flex flex-col gap-3">
                     <div className="">
                         <h1 className="text-lg font-semibold">
-                            Event Title
+                            {data.title}
                         </h1>
                         <div className="flex gap-3">
                             <p className="text-sm">
-                                July 5 2025
+                                {data.date}
                             </p>
                             <p className="text-sm">
-                                5 hrs
+                                {data.time}
                             </p>
                         </div>
                     </div>
                     {/* Category & Action */}
                     <div className="flex items-center gap-1 flex-wrap w-full whitespace-nowrap">
-                        {['data 1', 'data 2'].map((e, i) => 
+                        {data.category.item.map((e, i) => 
                         <span key={i} className="rounded-full border border-gray-700 bg-gray-800 px-3 py-1 text-xs font-medium text-gray-400">
                             {e}
                         </span>
                         )}
                     </div>
                     <p className="text-sm text-gray-500">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae quas dolor corporis, minus ad natus, quisquam incidunt inventore consectetur modi nemo nihil laborum reiciendis sequi ipsam porro iure voluptas eligendi!
+                        {data.description}
                     </p>
                 </div>
             </div>

@@ -57,6 +57,16 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const updateUserEmail = async (new_email) => {
+    try {
+      const { data, error } = await sb_db.auth.updateUser({
+        email: new_email.toLowerCase()
+      });
+    }catch(err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     sb_db.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -77,7 +87,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signUpNewUser, signInUser, session, signOut, signInUser0Auth }}
+      value={{ signUpNewUser, signInUser, session, signOut, signInUser0Auth, updateUserEmail }}
     >
       {children}
     </AuthContext.Provider>

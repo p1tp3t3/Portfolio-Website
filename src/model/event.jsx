@@ -7,7 +7,15 @@ export class Event {
     }
 
     async create() {
+        const newData = this.data
 
+        const { data, error } = await sb_db
+            .from(this.table)
+            .insert([{...newData}])
+            .select();
+
+        if (error) throw error;
+        return data;
     }
     
     async update() {
@@ -16,5 +24,16 @@ export class Event {
 
     async delete() {
 
+    }
+    
+    async list() {
+        const { data, error } = await sb_db
+            .from(this.table)
+            .select()
+            .order("created_at", { ascending: false });
+
+        if (error) throw error
+
+        return data
     }
 }

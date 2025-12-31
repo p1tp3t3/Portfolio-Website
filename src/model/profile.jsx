@@ -15,7 +15,8 @@ export class Profile {
       contact:contact(*),
       project:project(*),
       skill:skill(*),
-      experience:experience(*)
+      experience:experience(*),
+      event:event(*)
     `)
     .maybeSingle();
 
@@ -30,6 +31,9 @@ export class Profile {
     experience: data.experience?.sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     ) || [],
+    event: data.event?.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    ) || [],
   };
 }
 
@@ -39,6 +43,18 @@ export class Profile {
             .storage
             .from("image") // your bucket name
             .getPublicUrl('profile-pic.jpg');
+
+        if (error) {
+            console.error("Error getting public URL:", error);
+        }
+        
+        return publicUrl.publicUrl
+    }
+    getIcon() {
+        const { data: publicUrl, error } = sb_db
+            .storage
+            .from("image") // your bucket name
+            .getPublicUrl('main-icon.jpg');
 
         if (error) {
             console.error("Error getting public URL:", error);

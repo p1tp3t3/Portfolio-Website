@@ -96,7 +96,7 @@ const Home = (props) => {
                 <Section>
                     <div className="grid">
                         <div className="flex gap-5 w-full">
-                            <EventList />
+                            <EventList list={profile ? profile.event : []} />
                             <CertificationList />
                         </div>
                     </div>

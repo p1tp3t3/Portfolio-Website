@@ -9,13 +9,20 @@ import ProfilePage from './pages/admin/profile';
 import ProjectPage from './pages/admin/project';
 import ExperiencePage from './pages/admin/experience';
 import Skill from './pages/admin/skill';
-import Event from './pages/admin/event';
-import Certification from './pages/admin/certification';
+import EventPage from './pages/admin/event';
+import CertificationPage from './pages/admin/certification';
 import FeedbackPage from './pages/admin/feedback';
 import Setting from './pages/admin/setting';
-
+import { Profile } from './model/profile';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    const icon = new Profile().getIcon()
+  
+    const link = document.querySelector("link[rel~='icon']");
+    if (link) link.href = icon;
+  }, [])
   return (
     <BrowserRouter>
       <div className="App">
@@ -30,8 +37,8 @@ function App() {
             <Route path='/project' element={<ProjectPage />} />
             <Route path='/experience' element={<ExperiencePage />} />
             <Route path='/skill' element={<Skill />} />
-            <Route path='/event' element={<Event />} />
-            <Route path='/certification' element={<Certification />} />
+            <Route path='/event' element={<EventPage />} />
+            <Route path='/certification' element={<CertificationPage />} />
             <Route path='/feedback' element={<FeedbackPage />} />
             <Route path='/settings' element={<Setting />} />
           </Route>

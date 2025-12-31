@@ -71,9 +71,9 @@ const FeedbackPage = () => {
 
   return (
     <AdminLayout>
-      <div className="min-h-screen text-white px-6 py-10">
+      <div className="min-h-screen text-white py-10">
         {/* Feedback List */}
-        <AdminFeedBackList list={feedbacks} />
+        <AdminFeedBackList list={feedbacks} setter={setFeedbacks} />
       </div>
     </AdminLayout>
   );
