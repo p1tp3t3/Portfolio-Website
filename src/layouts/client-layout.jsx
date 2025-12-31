@@ -5,7 +5,7 @@ const ClientLayout = ({ footerData, children }) => {
     return (
         <main className="text-white bg-neutral-950">
             {/**<Header /> */}
-            <div className="w-[80rem] m-auto">
+            <div className="xl:w-[80rem] m-auto">
                 {children}
             </div>
             <Footer data={footerData} />

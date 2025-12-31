@@ -18,7 +18,7 @@ const ContentList = ({
     className 
 }) => {
     return (
-        <div className={`flex gap-3 ${center ? 'justify-center' : ''}`}>
+        <div className={`flex flex-wrap gap-3 ${center ? 'justify-center' : ''}`}>
             {list.map((e, i) => 
             <span key={i} className={`bg-grap-600 border-2 flex gap-3 whitespace-nowrap items-center border-gray-400 text-white px-5 py-2 rounded-full ${className}`}>
                 {e.icon} {e.label}

@@ -19,7 +19,7 @@ import { useEffect, useState } from "react"
 import Reload from "../../components/others/reload"
 
 
-const Home = (props) => {
+const Home = () => {
 
     const [profile, setProfile] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -28,87 +28,122 @@ const Home = (props) => {
         const fetchProfile = async () => {
             try {
                 const profileService = new Profile()
-                const data = await profileService.getProfile() // ✅ await it
+                const data = await profileService.getProfile()
 
                 document.title = data.name
-
-                setProfile(data) // set the resolved data
+                setProfile(data)
                 setLoading(false)
             } catch (err) {
                 console.error("Failed to load profile:", err)
             }
         }
 
-        fetchProfile() // call the async function
+        fetchProfile()
     }, [])
 
     return (
         <>
         <Reload loading={loading} />
         <ClientLayout footerData={profile ? profile.contact[0] : null}>
-            
+
             <div>
+
+                {/* HERO */}
                 <Section>
-                    <div className="grid place-items-center">
-                        <div className="grid place-items-center w-[50%] gap-5">
+                    <div className="grid place-items-center px-4">
+                        <div className="grid place-items-center w-full md:w-[70%] lg:w-[50%] gap-5">
+
                             <ProfilePic
                                 src={new Profile().getProfilePicture()}
-                                className="w-[12rem] h-[12rem]" 
+                                className="w-[9rem] h-[9rem] md:w-[12rem] md:h-[12rem]"
                             />
+
                             <div className="text-center grid gap-5">
-                                <div className="grid gap-5 text-center">
+                                <div className="grid gap-5">
                                     <div>
-                                        <h1 className="text-[3em] font-bold">{profile && profile.name}</h1>
-                                        <AutoTyper list={profile ? profile.auto_typer_items.item : []} className={'text-[2em] font-bold from-blue-700 via-blue-500 to-gray-300'} />
+                                        <h1 className="text-[2rem] md:text-[3em] font-bold">
+                                            {profile && profile.name}
+                                        </h1>
+
+                                        <AutoTyper
+                                            list={profile ? profile.auto_typer_items.item : []}
+                                            className="text-[1.4rem] md:text-[2em] font-bold from-blue-700 via-blue-500 to-gray-300"
+                                        />
                                     </div>
-                                    <div className="text-[0.9em]">
-                                        <ContentList center={true} />
+
+                                    <div className="text-[0.85em] md:text-[0.9em]">
+                                        <ContentList center />
                                     </div>
-                                    <div className="text-[1em] text-gray-300" dangerouslySetInnerHTML={{
-                                        __html: toTitleCasePreserveMarkdown(
-                                            profile ? `${profile.short_description}`.replace("\n", '<br>') : ''
-                                        )
-                                    }} />
+
+                                    <div
+                                        className="text-[0.95em] md:text-[1em] text-gray-300"
+                                        dangerouslySetInnerHTML={{
+                                            __html: toTitleCasePreserveMarkdown(
+                                                profile
+                                                    ? `${profile.short_description}`.replace("\n", "<br>")
+                                                    : ""
+                                            )
+                                        }}
+                                    />
                                 </div>
                             </div>
-                            <div className="flex justify-center gap-3">
-                                <button className="px-6 py-3 bg-white rounded-full text-black">Lets Colab</button>
-                                <button onClick={() => new Profile().getCurriculumVitae()} className="px-6 py-3 border-white border rounded-full text-white">View My Resume</button>
+
+                            {/* CTA */}
+                            <div className="flex flex-wrap justify-center gap-3">
+                                <button className="px-6 py-3 bg-white rounded-full text-black">
+                                    Lets Colab
+                                </button>
+                                <button
+                                    onClick={() => new Profile().getCurriculumVitae()}
+                                    className="px-6 py-3 border-white border rounded-full text-white"
+                                >
+                                    View My Resume
+                                </button>
                             </div>
                         </div>
                     </div>
                 </Section>
+
+                {/* PROJECT + EXPERIENCE */}
                 <Section>
-                    <div className="grid w-full">
-                        <div className="flex gap-5 w-full">
+                    <div className="grid w-full px-4">
+                        <div className="flex flex-col lg:flex-row gap-5 w-full">
                             <ProjectList list={profile ? profile.project : []} />
                             <ExperienceList list={profile ? profile.experience : []} />
                         </div>
                     </div>
                 </Section>
+
+                {/* SKILLS */}
                 <Section>
-                    <div className="grid">
-                        <div className="">
-                            <SkillList list={profile ? profile.skill : []} />
-                        </div>
+                    <div className="grid px-4">
+                        <SkillList list={profile ? profile.skill : []} />
                     </div>
                 </Section>
+
+                {/* EVENTS + CERTS */}
                 <Section>
-                    <div className="grid">
-                        <div className="flex gap-5 w-full">
+                    <div className="grid px-4">
+                        <div className="flex flex-col lg:flex-row gap-5 w-full">
                             <EventList list={profile ? profile.event : []} />
                             <CertificationList />
                         </div>
                     </div>
                 </Section>
+
+                {/* ABOUT */}
                 <Section>
-                    <About data={profile && profile.about} />
+                    <div className="px-4">
+                        <About data={profile && profile.about} />
+                    </div>
                 </Section>
+
             </div>
         </ClientLayout>
-        </>   
+        </>
     )
 }
+
 
 
 const Section = ({ children }) => {
