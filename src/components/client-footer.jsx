@@ -61,7 +61,8 @@ const Footer = ({ data }) => {
             const feedback = new FeedBack(feedbackData);
             const created = await feedback.create();
             addToast('Your Feedback Has Been Send Sucessfully to the Admin', 'success')
-            console.log("Feedback saved:", created);
+            document.querySelectorAll('input').forEach(e => e.value = '')
+            document.querySelector('textarea').value = ''
         } catch (err) {
             console.error("Failed to create feedback:", err);
             addToast('There Was An Error In Sending Your Feedback', 'error')
@@ -123,7 +124,7 @@ const Footer = ({ data }) => {
                                     required
                                     placeholder='Juan Boy'
                                     name='name'
-                                    className="w-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"
+                                    className="w-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-700"
                                 />
                             </div>
                             <div>
@@ -133,7 +134,7 @@ const Footer = ({ data }) => {
                                     required
                                     placeholder='name123@example.com'
                                     name='email'
-                                    className="w-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"
+                                    className="w-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-700"
                                 />
                             </div>
                             <div className="w-full h-[9rem]">
@@ -141,7 +142,7 @@ const Footer = ({ data }) => {
                                     name="description" 
                                     placeholder="Your Feedback" 
                                     id=""
-                                    className="w-full h-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-white/20"
+                                    className="w-full h-full px-4 py-2 rounded-lg text-sm bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-700"
                                 ></textarea>
                             </div>
                             <div>

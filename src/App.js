@@ -12,6 +12,7 @@ import Skill from './pages/admin/skill';
 import Event from './pages/admin/event';
 import Certification from './pages/admin/certification';
 import FeedbackPage from './pages/admin/feedback';
+import Setting from './pages/admin/setting';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path='/event' element={<Event />} />
             <Route path='/certification' element={<Certification />} />
             <Route path='/feedback' element={<FeedbackPage />} />
+            <Route path='/settings' element={<Setting />} />
           </Route>
         </Routes>
       </div>

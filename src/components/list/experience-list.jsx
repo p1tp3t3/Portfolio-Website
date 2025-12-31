@@ -40,7 +40,7 @@ const ExperienceList = ({ list = ['data 1', 'data 2', 'data 3'] }) => {
 };
 
 const Row = ({ data }) => {
-  const { title, description, content = ['data 1'], repoUrl, demoUrl } = data;
+  const { title, description, company_name, repoUrl, demoUrl } = data;
 
   return (
     <div className="grid gap-3 border-b border-gray-700 border-b-1 pb-4 w-full">
@@ -52,16 +52,21 @@ const Row = ({ data }) => {
         {/* Project Content */}
         <div className="w-full flex flex-col justify-between">
           <div>
-            <div className="mb-3 flex items-center w-full justify-between">
-                <h3 className="text-lg font-bold">{title || "Experience Title"}</h3>
-                <div className="text-[0.8em]">
-                    <p>2025</p>
-                </div>
+            <div>
+              <div className="flex items-center w-full justify-between">
+                  <h3 className="text-lg font-bold">{title || "Experience Title"}</h3>
+                  <div className="text-[0.8em]">
+                      <p>2025</p>
+                  </div>
+              </div>
+              <div className="text-gray-300 text-[0.9em]">
+                <p>{company_name}</p>
+                <p className="mt-3">
+                  {description ||
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa numquam reiciendis tempora in! Minus odit magni vitae corrupti dolorem veritatis libero illum, earum laboriosam debitis perspiciatis provident ipsa nobis eum."}
+                </p>
+              </div>
             </div>
-            <p className="text-gray-300 text-[0.9em]">
-              {description ||
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa numquam reiciendis tempora in! Minus odit magni vitae corrupti dolorem veritatis libero illum, earum laboriosam debitis perspiciatis provident ipsa nobis eum."}
-            </p>
             <div className="py-2">
                 <ul className="list-disc pl-5 text-[0.8em] text-gray-500 grid gap-2 text-justify">
                     {data.details.item.map((e, i) =>
